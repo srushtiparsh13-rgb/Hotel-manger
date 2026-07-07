@@ -1,15 +1,15 @@
-# Hospital Management REST API
+# Hotel Manager REST API
 
-A beginner-friendly Full-Stack Hospital Management System built using **Express.js**, **better-sqlite3 (SQLite)**, **React**, and **Vite**.
+A beginner-friendly Full-Stack **Hotel Manager Management System** built using **Express.js**, **better-sqlite3 (SQLite)**, **React**, and **Vite**.
 
-This project demonstrates complete CRUD (Create, Read, Update, Delete) operations using a REST API with a modern React frontend.
+This project demonstrates complete CRUD (Create, Read, Update, Delete) operations using REST APIs with a modern React frontend.
 
 ---
 
 # Project Structure
 
 ```
-Hospital-Management/
+Hotel-Manager/
 
 │
 ├── backend/
@@ -24,8 +24,8 @@ Hospital-Management/
 │           └── App.css
 │
 └── postman/
-    ├── Hospital-management-API.postman_collection.json
-    └── Hospital-management.postman_environment.json
+    ├── Hotel-Manger-API.postman_collection.json
+    └── Hotel-Manger-API.postman_environment.json
 ```
 
 ---
@@ -46,7 +46,7 @@ Hospital-Management/
 - Vite
 - CSS3
 
-## Testing
+## API Testing
 
 - Postman
 
@@ -54,39 +54,38 @@ Hospital-Management/
 
 # Features
 
-## Backend
+## Backend Features
 
-- SQLite database
-- Automatically creates Management table
+- SQLite Database
+- Automatically creates **Manger** table
 - REST API
-- Create patient
-- Read all patients
-- Read patient by ID
-- Update patient
-- Delete patient
+- Register Manager
+- View All Managers
+- View Manager by ID
+- Update Manager
+- Delete Manager
 - Pagination
 - Search by Name
-- Search by Address
 - Duplicate Email Validation
 - Required Field Validation
 
 ---
 
-## Frontend
+## Frontend Features
 
-- Patient Registration Form
-- Live Character Counter
-- Email Validation
-- Phone Validation
-- Edit Patient
-- Delete Patient
-- Search Patients
+- Responsive Registration Form
+- Live Character Counter (40 characters)
+- Client-side Validation
+- Manager List
+- Search Managers
 - Pagination
-- Avatar using Patient Initials
+- Avatar using Manager Initials
 - Loading Indicator
 - Last Updated Timestamp
 - Dark Mode Toggle
-- API Error Messages
+- Edit Manager
+- Delete Manager
+- Display API Error Messages
 
 ---
 
@@ -101,7 +100,7 @@ data.db
 Table Name
 
 ```
-Management
+Manger
 ```
 
 Columns
@@ -112,18 +111,16 @@ Columns
 | name | TEXT |
 | email | TEXT UNIQUE |
 | phone | TEXT |
-| address | TEXT |
-| date_of_birth | TEXT |
 | registered_at | TIMESTAMP |
 
 ---
 
 # REST API Endpoints
 
-## Create Patient
+## Register Manager
 
 ```
-POST /patients
+POST /Mangers
 ```
 
 Required Fields
@@ -133,24 +130,28 @@ name
 email
 ```
 
-Example
+Example Request
 
 ```json
 {
-    "name":"John",
-    "email":"john@gmail.com",
-    "phone":"9876543210",
-    "address":"New York",
-    "date_of_birth":"2000-01-01"
+    "name":"Rahul Sharma",
+    "email":"rahul@gmail.com",
+    "phone":"9876543210"
 }
+```
+
+Success Response
+
+```
+201 Created
 ```
 
 ---
 
-## Get All Patients
+## Get All Managers
 
 ```
-GET /patients
+GET /Mangers
 ```
 
 Pagination
@@ -163,61 +164,79 @@ Pagination
 Search
 
 ```
-?search=john
+?search=rahul
 ```
 
 Example
 
 ```
-GET /patients?page=1&limit=5&search=john
+GET /Mangers?page=1&limit=5&search=rahul
 ```
+
+Response includes
+
+- data
+- page
+- limit
+- total
+- totalPages
 
 ---
 
-## Get Patient By ID
+## Get Manager by ID
 
 ```
-GET /patients/1
-```
-
----
-
-## Update Patient
-
-```
-PUT /patientss/1
+GET /Mangers/:id
 ```
 
 Example
+
+```
+GET /Mangers/1
+```
+
+---
+
+## Update Manager
+
+```
+PUT /Mangers/:id
+```
+
+Example Request
 
 ```json
 {
-    "name":"John Updated",
-    "email":"johnupdated@gmail.com",
-    "phone":"9999999999",
-    "address":"Chicago",
-    "date_of_birth":"1999-06-10"
+    "name":"Rahul Kumar",
+    "email":"rahulkumar@gmail.com",
+    "phone":"9999999999"
 }
 ```
 
 ---
 
-## Delete Patient
+## Delete Manager
 
 ```
-DELETE /patients/1
+DELETE /Mangers/:id
+```
+
+Example
+
+```
+DELETE /Mangers/1
 ```
 
 ---
 
 # HTTP Status Codes
 
-| Code | Meaning |
-|------|----------|
+| Code | Description |
+|------|-------------|
 |200|Success|
-|201|Created|
-|400|Bad Request|
-|404|Not Found|
+|201|Manager Created|
+|400|Missing Required Fields|
+|404|Manager Not Found|
 |409|Duplicate Email|
 |500|Internal Server Error|
 
@@ -225,25 +244,25 @@ DELETE /patients/1
 
 # Running the Backend
 
-Open terminal
+Navigate to backend folder
 
 ```
 cd backend/server
 ```
 
-Install packages
+Install dependencies
 
 ```
 npm install
 ```
 
-Start server
+Run the server
 
 ```
 node index.js
 ```
 
-Server URL
+Backend URL
 
 ```
 http://localhost:5000
@@ -253,25 +272,25 @@ http://localhost:5000
 
 # Running the Frontend
 
-Open another terminal
+Navigate to frontend folder
 
 ```
 cd frontend/apiDemo
 ```
 
-Install packages
+Install dependencies
 
 ```
 npm install
 ```
 
-Run
+Start the React application
 
 ```
 npm run dev
 ```
 
-Open browser
+Frontend URL
 
 ```
 http://localhost:5173
@@ -283,35 +302,30 @@ http://localhost:5173
 
 Import the following files into Postman.
 
-```
-Hospital-management-API.postman_collection.json
-```
-
-and
+Collection
 
 ```
-Hospital-management.postman_environment.json
+Hotel-Manger-API.postman_collection.json
 ```
 
-The environment contains
+Environment
 
 ```
-base_url
-
-patient_id
+Hotel-Manger-API.postman_environment.json
 ```
 
-Default Base URL
+Environment Variables
 
-```
-http://localhost:5000
-```
+| Variable | Value |
+|----------|-------|
+| base_url | http://localhost:5000 |
+| Manger_id | Placeholder value |
 
 ---
 
 # Pagination
 
-Default limit
+Default Limit
 
 ```
 5
@@ -320,79 +334,91 @@ Default limit
 Example
 
 ```
-GET /patients?page=2&limit=5
+GET /Mangers?page=2&limit=5
 ```
 
 ---
 
 # Search
 
-Patients can be searched using
-
-- Name
-- Address
+Search Managers by Name
 
 Example
 
 ```
-GET /patients?search=bangalore
+GET /Mangers?search=Rahul
 ```
 
 ---
 
 # Frontend Highlights
 
-- Responsive UI
+- Responsive Design
+- Modern UI
 - Character Counter
-- Patient Avatar
-- Dark Theme
-- Light Theme
+- Search Functionality
+- Pagination Controls
+- Dark Mode
+- Light Mode
 - Loading Spinner
-- Edit Mode
-- Delete Confirmation
-- Search Box
-- Pagination
-- API Error Display
+- Avatar Initials
+- Edit Manager
+- Delete Manager
+- Error Notifications
 - Last Updated Timestamp
 
 ---
 
-# Validation
+# Validations
 
-Backend
+## Backend
 
 - Name is required
 - Email is required
-- Duplicate Email is not allowed
+- Email must be unique
 
-Frontend
+## Frontend
 
-- Name required
-- Email required
-- Email format validation
-- Phone number validation
+- Name is mandatory
+- Email is mandatory
+- Valid Email Format
+- Phone is optional
 - Name maximum 40 characters
 
 ---
 
-# Future Improvements
+# API Workflow
 
-- Login Authentication
-- JWT Security
-- Admin Dashboard
-- Patient Photo Upload
-- Doctor Management
-- Appointment Booking
+1. Register a new Manager.
+2. View all registered Managers.
+3. Search Managers.
+4. View Manager details.
+5. Update Manager information.
+6. Delete Manager.
+7. Test APIs using Postman.
+
+---
+
+# Future Enhancements
+
+- Manager Login
+- JWT Authentication
+- Hotel Dashboard
+- Hotel Branch Management
+- Staff Management
+- Room Management
+- Customer Booking
 - Billing Module
-- Medical Reports
-- Role-Based Access Control
+- Reports
 - Export to Excel/PDF
+- Image Upload
+- Role-Based Access Control
 
 ---
 
 # Author
 
-Hospital Management REST API
+**Hotel Manager REST API**
 
 Built using
 
@@ -402,4 +428,4 @@ Built using
 - React
 - Vite
 
-This project is intended for educational purposes to demonstrate a complete beginner-friendly Full-Stack CRUD application with REST APIs.
+This project is intended for educational purposes and demonstrates a complete beginner-friendly Full-Stack CRUD application using Express.js, SQLite, React, and REST APIs.
